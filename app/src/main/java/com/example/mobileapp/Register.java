@@ -29,6 +29,7 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         createElements();
+        buttonRegister.setEnabled(false);
 
 
 
@@ -44,7 +45,9 @@ public class Register extends AppCompatActivity {
                 if( !(editTextRegisterPassword.getText().toString().trim().equals(editTextRegisterConfirmPassword.getText().toString().trim())) ){
                     //Set the error icon visible
                     editTextRegisterConfirmPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_baseline_lock_open_24,0,R.drawable.ic_baseline_error_24,0);
-
+                    buttonRegister.setEnabled(false);
+                }else{
+                    buttonRegister.setEnabled(true);
                 }
                 if(editTextRegisterConfirmPassword.getText().toString().isEmpty()){
                     editTextRegisterConfirmPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_baseline_lock_open_24,0,0,0);
