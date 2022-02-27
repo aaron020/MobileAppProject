@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Register">
+    tools:context=".Register"
+    android:background="@color/grey">
 
 
     <TextView
+        android:textColor="@color/white"
         android:id="@+id/textViewRegister"
         android:layout_width="wrap_content"
         android:textSize="50dp"
@@ -19,6 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:textColorHint="@color/white"
         android:id="@+id/editTextRegisterUsername"
         android:layout_width="300dp"
         android:layout_height="60dp"
@@ -35,6 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewRegister" />
 
     <EditText
+        android:textColorHint="@color/white"
         android:id="@+id/editTextRegisterEmailAddress"
         android:layout_width="300dp"
         android:layout_height="60dp"
@@ -51,6 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextRegisterUsername" />
 
     <EditText
+        android:textColorHint="@color/white"
         android:id="@+id/editTextRegisterPassword"
         android:layout_width="300dp"
         android:layout_height="60dp"
@@ -66,6 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextRegisterEmailAddress" />
 
     <EditText
+        android:textColorHint="@color/white"
         android:id="@+id/editTextRegisterPasswordConfirm"
         android:layout_width="300dp"
         android:layout_height="60dp"
@@ -81,6 +87,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPassword" />
 
     <Button
+        android:textColor="@color/white"
         android:id="@+id/buttonRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -93,6 +100,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPasswordConfirm" />
 
     <TextView
+        android:textColor="@color/white"
         android:id="@+id/textViewHaveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
