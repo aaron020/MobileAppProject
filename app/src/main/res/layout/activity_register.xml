@@ -60,7 +60,6 @@
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_margin="10dp"
-        android:drawableLeft="@drawable/ic_baseline_lock_24"
         android:ems="10"
         android:fontFamily="sans-serif-thin"
         android:hint="Password"
