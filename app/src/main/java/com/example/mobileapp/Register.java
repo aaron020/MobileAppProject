@@ -3,10 +3,12 @@ package com.example.mobileapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -90,9 +92,22 @@ public class Register extends AppCompatActivity {
                 if(editTextRegisterPassword.getText().toString().isEmpty()){
                     editTextRegisterPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_baseline_lock_24,0,0,0);
                 }
+
+                if( !(editTextRegisterPassword.getText().toString().trim().equals(editTextRegisterConfirmPassword.getText().toString().trim())) ){
+                    //Set the error icon visible
+                    editTextRegisterConfirmPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_baseline_lock_open_24,0,R.drawable.ic_baseline_error_24,0);
+                    buttonRegister.setEnabled(false);
+                }else{
+                    editTextRegisterConfirmPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_baseline_lock_open_24,0,R.drawable.ic_baseline_check_24,0);
+                    buttonRegister.setEnabled(true);
+                }
+                if(editTextRegisterConfirmPassword.getText().toString().isEmpty()){
+                    editTextRegisterConfirmPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_baseline_lock_open_24,0,0,0);
+                }
             }
         });
     }
+
 
     private void clickRegisterButton(){
         //When the register button is clicked
@@ -105,6 +120,7 @@ public class Register extends AppCompatActivity {
                 password = editTextRegisterPassword.getText().toString().trim();
                 passwordConfirmed = editTextRegisterConfirmPassword.getText().toString().trim();
                 registerAccount(email,password, username);
+
             }
         });
     }

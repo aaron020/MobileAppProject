@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private String password;
     private boolean emailFilled = false;
     private boolean passwordFilled = false;
+    private final int PASS_LENGTH = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
         //Only if they have both been entered will the Login button be enabled
         verifyFieldsListener();
 
+        if (FirebaseAuth.getInstance().getCurrentUser() != null){
+            Intent intent = new Intent(MainActivity.this, Home.class);
+            startActivity(intent);
+            finish();
+        }
+
+
     }
 
     private void login(String email, String password){
@@ -54,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(MainActivity.this,"Signed In", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, Home.class);
+                    startActivity(intent);
+                    finish();
                 }else{
                     Toast.makeText(MainActivity.this,"Error " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     progressBarLogin.setVisibility(View.INVISIBLE);
@@ -117,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private boolean verifyPassword(String password){
-        if(password.length() < 8){
+        if(password.length() < PASS_LENGTH){
             return false;
         }else{
             return true;
