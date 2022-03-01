@@ -8,12 +8,93 @@
     android:background="@color/grey">
 
     <Button
-        android:id="@+id/buttonHomeLogout"
+        android:id="@+id/buttonHomeInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
+        android:text="Info"
+        android:textStyle="bold"
         android:fontFamily="sans-serif-thin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="100dp"
+        android:width="200dp"
+        android:height="80dp"
+        android:gravity="bottom|center_horizontal"
+        android:drawableTop="@drawable/ic_baseline_info_24"
+        />
+
+    <Button
+        android:id="@+id/buttonHomeMyLocation"
+        android:text="My Location"
+
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="bottom|center_horizontal"
+        android:layout_marginTop="20dp"
+        android:width="200dp"
+        android:height="80dp"
+        android:drawableTop="@drawable/ic_baseline_location_on_24"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonHomeInfo"
+        />
+
+    <Button
+        android:id="@+id/buttonHomeNewLocation"
+        android:text="New Location"
+
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="bottom|center_horizontal"
+        android:layout_marginTop="20dp"
+        android:width="200dp"
+        android:height="80dp"
+        android:drawableTop="@drawable/ic_baseline_add_location_24"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonHomeMyLocation"
+        />
+
+    <Button
+        android:id="@+id/buttonHomeSettings"
+        android:text="Settings"
+
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="bottom|center_horizontal"
+        android:layout_marginTop="20dp"
+        android:width="200dp"
+        android:height="80dp"
+        android:drawableTop="@drawable/ic_baseline_settings_24"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonHomeNewLocation" />
+
+    <Button
+        android:id="@+id/buttonHomeLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:width="100dp"
+        android:height="80dp"
+        android:drawableTop="@drawable/ic_baseline_exit_to_app_24"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="bottom|center_horizontal"
+        android:text="Logout"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonHomeSettings" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
