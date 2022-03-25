@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         //Only if they have both been entered will the Login button be enabled
         verifyFieldsListener();
 
+        //Checks if the user is already logged in and if they are you go straight to the
+        //home page
         if (FirebaseAuth.getInstance().getCurrentUser() != null){
             Intent intent = new Intent(MainActivity.this, Home.class);
             startActivity(intent);
@@ -51,7 +53,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+    /*
+    This function first checks if the username and password are not empty, it then uses
+    firebase to check the creds, if they are correct it logs you into the home page
+     */
     private void login(String email, String password){
         if(email.isEmpty() || password.isEmpty()){
             Toast.makeText(MainActivity.this,"Missing Field!", Toast.LENGTH_SHORT).show();
@@ -75,7 +80,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+    /*
+    A listener to check if the email and password have been entered and if they have the
+    login button is enabled
+     */
     private void verifyFieldsListener(){
         editTextLoginEmailAddress.addTextChangedListener(new TextWatcher() {
             @Override
@@ -126,7 +134,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    /*
+    Verify that the password is pasta a set length
+     */
     private boolean verifyPassword(String password){
         if(password.length() < PASS_LENGTH){
             return false;
@@ -136,7 +146,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    /*
+    Listener for the login button
+     */
     private void clickLoginListener(){
         //Click the login button
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +163,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    /*
+    Creates all UI elements
+     */
     private void createElements(){
         editTextLoginEmailAddress = findViewById(R.id.editTextLoginEmailAddress);
         editTextLoginPassword = findViewById(R.id.editTextLoginPassword);
@@ -163,7 +177,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    //When the Sign Up text is clicked on the login page this method is called
+    /*
+    When the Sign Up text is clicked on the login page this method is called
+     */
     public void registerAccountPage(View view){
         startActivity(new Intent(getApplicationContext(), Register.class));
         finish();
