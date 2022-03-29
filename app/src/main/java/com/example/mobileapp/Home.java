@@ -74,11 +74,15 @@ public class Home extends AppCompatActivity {
                     @Override
                     public void run(){
                         progressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(Home.this,"Location Found @" + coords[0] + ", " + coords[1], Toast.LENGTH_SHORT).show();
                         System.out.println(coords[0] + "   " + coords[1]);
+                        Intent intent = new Intent(Home.this, MyLocationPost.class);
+                        startActivity(intent);
+                        finish();
                     }
                 };
                 Handler h = new Handler();
-                h.postDelayed(r, 2000);
+                h.postDelayed(r, 5000);
             }
         });
 
@@ -104,7 +108,8 @@ public class Home extends AppCompatActivity {
                                         int index = locationResult.getLocations().size() - 1;
                                         coords[0] = locationResult.getLocations().get(index).getLatitude();
                                         coords[1] = locationResult.getLocations().get(index).getLongitude();
-
+                                        Location.latitude = locationResult.getLocations().get(index).getLatitude();
+                                        Location.longitude = locationResult.getLocations().get(index).getLongitude();
                                         //AddressText.setText(coords[0] + "  " + coords[1]);
 
 
