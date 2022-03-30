@@ -2,6 +2,7 @@ package com.example.mobileapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
@@ -31,6 +33,7 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -38,8 +41,8 @@ public class Home extends AppCompatActivity {
     private Button buttonHomeLogout;
     private Button buttonHomeMyLocation;
     private ProgressBar progressBar;
-    private double[] coords = new double[2];
     private LocationRequest locationRequest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +53,7 @@ public class Home extends AppCompatActivity {
     }
 
 
-    private void clickLogout(){
+    private void clickLogout() {
         buttonHomeLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,31 +65,56 @@ public class Home extends AppCompatActivity {
         });
     }
 
-    private void clickMyLocation(){
+    private void clickMyLocation() {
         buttonHomeMyLocation.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
+                //getCurrentLocation();
                 getCurrentLocation();
-
                 //Delay the code while it finds the users location
-                Runnable r = new Runnable() {
-                    @Override
-                    public void run(){
-                        progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(Home.this,"Location Found @" + coords[0] + ", " + coords[1], Toast.LENGTH_SHORT).show();
-                        System.out.println(coords[0] + "   " + coords[1]);
-                        Intent intent = new Intent(Home.this, MyLocationPost.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                };
-                Handler h = new Handler();
-                h.postDelayed(r, 5000);
+
+
+
             }
         });
 
     }
+
+
+//    @RequiresApi(api = Build.VERSION_CODES.M)
+//    private void getLocation() {
+//        FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(Home.this);
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+//            if(isGPSEnabled()){
+//                fusedLocationProviderClient.getLastLocation()
+//                        .addOnSuccessListener(new OnSuccessListener<android.location.Location>() {
+//                            @Override
+//                            public void onSuccess(android.location.Location location) {
+//                                if(location == null){
+//                                    Toast.makeText(Home.this, "Unable to find location", Toast.LENGTH_SHORT).show();
+//                                    return;
+//                                }
+//                                Location.latitude = location.getLatitude();
+//                                Location.longitude = location.getLongitude();
+//                                Toast.makeText(Home.this, "Location Found @" + Location.latitude + ", " + Location.longitude, Toast.LENGTH_SHORT).show();
+//                                //Switch to the post page
+//                                Intent intent = new Intent(Home.this, MyLocationPost.class);
+//                                startActivity(intent);
+//                                finish();
+//                            }
+//                        });
+//            }else{
+//                turnOnGPS();
+//            }
+//
+//        }else{
+//            System.out.println("Permisson--------------");
+//            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+//        }
+//
+//    }
 
     private void getCurrentLocation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -106,10 +134,13 @@ public class Home extends AppCompatActivity {
                                     if (locationResult != null && locationResult.getLocations().size() >0){
 
                                         int index = locationResult.getLocations().size() - 1;
-                                        coords[0] = locationResult.getLocations().get(index).getLatitude();
-                                        coords[1] = locationResult.getLocations().get(index).getLongitude();
                                         Location.latitude = locationResult.getLocations().get(index).getLatitude();
                                         Location.longitude = locationResult.getLocations().get(index).getLongitude();
+                                        Toast.makeText(Home.this, "Location Found @" + Location.latitude + ", " + Location.longitude, Toast.LENGTH_SHORT).show();
+                                        //Switch to the post page
+                                        Intent intent = new Intent(Home.this, MyLocationPost.class);
+                                        startActivity(intent);
+                                        finish();
                                         //AddressText.setText(coords[0] + "  " + coords[1]);
 
 
@@ -127,6 +158,7 @@ public class Home extends AppCompatActivity {
             }
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -149,6 +181,7 @@ public class Home extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -163,6 +196,7 @@ public class Home extends AppCompatActivity {
 
 
     private void turnOnGPS() {
+        System.out.println("GPS------------------");
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(locationRequest);
         builder.setAlwaysShow(true);

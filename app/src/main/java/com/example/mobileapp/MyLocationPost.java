@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 
@@ -34,6 +35,7 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
     private ArrayList<String> userData = new ArrayList<>();
     private RecyclerView recyclerView;
     private Button addPost;
+    private ImageButton buttonMLPToMenu;
     private FirebaseFirestore fStore;
     private ArrayList<Post> posts;
 
@@ -44,17 +46,10 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
         createElements();
         addPostClick();
         EventChange();
-        Runnable r = new Runnable() {
-            @Override
-            public void run(){
-                recyclerView = findViewById(R.id.recyclerviewMyLocation);
-                MyAdapter myAdapter = new MyAdapter(posts,MyLocationPost.this, MyLocationPost.this);
-                recyclerView.setAdapter(myAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(MyLocationPost.this));
-            }
-        };
-        Handler h = new Handler();
-        h.postDelayed(r, 5000);
+        MLPToMenu();
+
+
+
 
 
 
@@ -72,11 +67,12 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
                 for(DocumentChange dc : value.getDocumentChanges()){
                     if(dc.getType() == DocumentChange.Type.ADDED){
                         posts.add(dc.getDocument().toObject(Post.class));
-                        System.out.println("adding--------------------------------------");
                     }
-
-
                 }
+                recyclerView = findViewById(R.id.recyclerviewMyLocation);
+                MyAdapter myAdapter = new MyAdapter(posts,MyLocationPost.this, MyLocationPost.this);
+                recyclerView.setAdapter(myAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(MyLocationPost.this));
             }
         });
 
@@ -87,6 +83,18 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
         addPost = findViewById(R.id.buttonAddPost);
         fStore = FirebaseFirestore.getInstance();
         posts = new ArrayList<>();
+        buttonMLPToMenu = findViewById(R.id.buttonMLPToMenu);
+    }
+
+    private void MLPToMenu(){
+        buttonMLPToMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyLocationPost.this, Home.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void addPostClick(){
