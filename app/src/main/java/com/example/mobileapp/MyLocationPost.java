@@ -12,11 +12,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -27,36 +31,52 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPostListener {
-    private ArrayList<String> titles = new ArrayList<>();
-    private ArrayList<String> descriptions = new ArrayList<>();
-    private ArrayList<String> userData = new ArrayList<>();
     private RecyclerView recyclerView;
-    private Button addPost;
-    private ImageButton buttonMLPToMenu;
+
+    private FloatingActionsMenu FAButtonMyLocation;
+    private FloatingActionButton FAButtonMenu,FAButtonLocation,FAButtonAdd;
+    private Animation open, close, fromBottom, toBottom;
+    private boolean isOpen;
+
     private FirebaseFirestore fStore;
     private ArrayList<Post> posts;
+    private Distance dist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_location_post);
         createElements();
-        addPostClick();
         EventChange();
-        MLPToMenu();
-
-
-
-
-
+        floatingButton();
 
     }
 
+    private void floatingButton(){
+        FAButtonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyLocationPost.this, addPost.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        FAButtonMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyLocationPost.this, Home.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
     private void EventChange() {
-        fStore.collection("posts").orderBy("title",Query.Direction.ASCENDING)
+        fStore.collection("posts")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -70,6 +90,9 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
                     }
                 }
                 recyclerView = findViewById(R.id.recyclerviewMyLocation);
+                //Sort posts depending on time of posting
+                Collections.sort(posts);
+                manageDistance();
                 MyAdapter myAdapter = new MyAdapter(posts,MyLocationPost.this, MyLocationPost.this);
                 recyclerView.setAdapter(myAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(MyLocationPost.this));
@@ -78,35 +101,30 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
 
     }
 
+    private void manageDistance(){
+        for(int i = 0; i < posts.size(); i++){
+            if(dist.distance(Location.latitude, Location.longitude, posts.get(i).getLatitude(),posts.get(i).getLongitude()) > Settings.Distance){
+                posts.remove(i);
+            }
+        }
+    }
+
+
+
 
     private void createElements(){
-        addPost = findViewById(R.id.buttonAddPost);
         fStore = FirebaseFirestore.getInstance();
         posts = new ArrayList<>();
-        buttonMLPToMenu = findViewById(R.id.buttonMLPToMenu);
+        dist = new Distance();
+        FAButtonMyLocation = findViewById(R.id.FAButtonMyLocation);
+        FAButtonMenu = findViewById(R.id.FAButtonMenu);
+        FAButtonLocation  = findViewById(R.id.FAButtonLocation);
+        FAButtonAdd = findViewById(R.id.FAButtonAdd);
+        isOpen = false;
+
     }
 
-    private void MLPToMenu(){
-        buttonMLPToMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MyLocationPost.this, Home.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
 
-    private void addPostClick(){
-        addPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MyLocationPost.this, addPost.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
 
     @Override
     public void onPostClick(int position) {

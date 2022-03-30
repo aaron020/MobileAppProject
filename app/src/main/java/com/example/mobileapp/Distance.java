@@ -9,6 +9,7 @@ public class Distance {
         dist = Math.acos(dist);
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515;
+        System.out.println(dist * 1.609344);
         return dist * 1.609344;
     }
     private double deg2rad(double deg) {

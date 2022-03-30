@@ -1,5 +1,6 @@
 package com.example.mobileapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
-    private ArrayList<Post> posts = new ArrayList<>();
+    private ArrayList<Post> posts;
+//    private ArrayList<String> usernames;
     private Context ct;
     private OnPostListener mOnPostListener;
 
@@ -21,7 +23,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         this.posts = posts;
         this.ct = ct;
         this.mOnPostListener = onPostListener;
+//        userIdToUsername();
     }
+
 
 
     @NonNull
@@ -32,11 +36,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         return new MyViewHolder(view, mOnPostListener);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.textViewTitle.setText(posts.get(position).getTitle());
         holder.textViewDescription.setText(posts.get(position).getDescription());
-        holder.textViewUserData.setText(posts.get(position).getUserId());
+        Time t = new Time();
+        String usernameTime = posts.get(position).getUsername() + "   -   " + t.getApproxTime(posts.get(position).getTimestamp());
+        holder.textViewUserData.setText(usernameTime);
     }
 
     @Override

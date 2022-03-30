@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyLocationPost">
+    tools:context=".MyLocationPost"
+    android:background="@color/grey">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewMyLocation"
@@ -13,23 +14,49 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp" />
 
-    <Button
-        android:id="@+id/buttonAddPost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Post"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageButton
-        android:id="@+id/buttonMLPToMenu"
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/FAButtonMyLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:fab_expandDirection="up"
+        app:fab_labelsPosition="left"
+        app:fab_labelStyle="@style/LabelStyle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonAddPost"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/FAButtonMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/teal_blue"
+            app:fab_title="Menu"
+            app:fab_icon="@drawable/ic_baseline_menu_24" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/FAButtonLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/teal_blue"
+            app:fab_title="View Map"
+            app:fab_icon="@drawable/ic_baseline_map_24" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/FAButtonAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/teal_blue"
+            app:fab_title="Add Post"
+            app:fab_icon="@drawable/ic_baseline_create_24"
+            app:srcCompat="@drawable/ic_baseline_create_24" />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

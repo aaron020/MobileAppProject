@@ -1,5 +1,6 @@
 package com.example.mobileapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,7 +19,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.HashMap;
 
@@ -26,6 +29,7 @@ public class addPost extends AppCompatActivity {
     private EditText editTextPostTitle , editTextPostDescription;
     private Button buttonPost;
     private ImageButton buttonAddPostToMLP;
+    private String username;
     FirebaseFirestore fStore;
 
     @Override
@@ -72,17 +76,32 @@ public class addPost extends AppCompatActivity {
                 }else if(TextUtils.isEmpty(description)){
                     Toast.makeText(addPost.this,"Enter a description", Toast.LENGTH_SHORT).show();
                 }else{
-                    DocumentReference dr = fStore.getInstance().collection("posts").document();
-                    String id = dr.getId();
-                    System.out.println(id);
-                    Post newPost = new Post(id,title,description,userId,Location.latitude,Location.longitude);
-                    fStore.collection("posts").document(id).set(newPost).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(addPost.this,"Posted!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    addToDb(userId,title,description);
                 }
+            }
+        });
+    }
+
+
+    public void addToDb(String userId,String title, String description){
+        DocumentReference docRead;
+        docRead = fStore.collection("users").document(userId);
+        docRead.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                //Get username then add all data to db
+                username = value.getString("username");
+                DocumentReference dr = fStore.getInstance().collection("posts").document();
+                String id = dr.getId();
+                System.out.println(id);
+                Post newPost = new Post(id,username,title,description,userId,Location.latitude,Location.longitude);
+                fStore.collection("posts").document(id).set(newPost).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(addPost.this,"Posted!", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
             }
         });
     }
