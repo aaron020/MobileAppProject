@@ -19,4 +19,14 @@ public class Distance {
         return (rad * 180.0 / Math.PI);
     }
 
+    public String distanceToString(double lat1, double lon1, double lat2, double lon2){
+        double distance = distance(lat1,lon1,lat2,lon2);
+        for(int i = 1; i < 150; i++){
+            if(distance < i){
+                return "~" + i + "km away";
+            }
+        }
+        return "far away";
+    }
+
 }

@@ -61,9 +61,17 @@
             android:layout_toEndOf="@id/PostImage"
             />
 
-
-
-
+        <TextView
+            android:id="@+id/textViewLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/PostImage"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/textViewDescription"
+            android:textSize="8sp"
+            android:textStyle="italic"
+            android:text="5km away" />
 
 
     </RelativeLayout>

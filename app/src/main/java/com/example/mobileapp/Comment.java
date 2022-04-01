@@ -1,0 +1,33 @@
+package com.example.mobileapp;
+
+public class Comment {
+    private String username;
+    private double timestamp;
+    private String text;
+    private String postId;
+
+    public Comment(){}
+
+    public Comment(String username, String postId, String text) {
+        this.username = username;
+        this.postId = postId;
+        this.timestamp = System.currentTimeMillis();;
+        this.text = text;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public double getTimestamp() {
+        return timestamp;
+    }
+
+    public String getText() {
+        return text;
+    }
+}

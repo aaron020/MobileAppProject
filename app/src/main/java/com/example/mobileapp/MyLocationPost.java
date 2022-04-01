@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -31,6 +32,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -69,6 +71,15 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MyLocationPost.this, Home.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        FAButtonLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyLocationPost.this, myLocationMap.class);
+                intent.putExtra("posts", posts);
                 startActivity(intent);
                 finish();
             }
@@ -129,7 +140,9 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
     @Override
     public void onPostClick(int position) {
         System.out.println(position);
-        Intent i = new Intent(this, OpenPost.class);
+        Intent i = new Intent(this, DetailedPost.class);
+        //Send the info of the post to the next activity
+        i.putExtra("post", posts.get(position));
         startActivity(i);
 
     }

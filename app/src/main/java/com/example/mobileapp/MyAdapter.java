@@ -40,9 +40,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.textViewTitle.setText(posts.get(position).getTitle());
-        holder.textViewDescription.setText(posts.get(position).getDescription());
+        holder.textViewDescription.setText(posts.get(position).getShortDesc());
         Time t = new Time();
         String usernameTime = posts.get(position).getUsername() + "   -   " + t.getApproxTime(posts.get(position).getTimestamp());
+        Distance d = new Distance();
+        String distance = d.distanceToString(Location.latitude,Location.longitude,posts.get(position).getLatitude(),posts.get(position).getLongitude());
+        holder.textViewLocation.setText(distance);
         holder.textViewUserData.setText(usernameTime);
     }
 
@@ -56,6 +59,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         TextView textViewTitle;
         TextView textViewDescription;
         TextView textViewUserData;
+        TextView textViewLocation;
         OnPostListener onPostListener;
         public MyViewHolder(@NonNull View itemView, OnPostListener onPostListener) {
             super(itemView);
@@ -63,6 +67,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
             textViewDescription = itemView.findViewById(R.id.textViewDescription);
             textViewUserData = itemView.findViewById(R.id.textViewUserData);
+            textViewLocation = itemView.findViewById(R.id.textViewLocation);
             this.onPostListener = onPostListener;
             itemView.setOnClickListener(this);
         }
