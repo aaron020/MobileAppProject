@@ -39,7 +39,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Home extends AppCompatActivity {
     private Button buttonHomeLogout;
-    private Button buttonHomeMyLocation;
+    private Button buttonHomeMyLocation, buttonHomeNewLocation;
     private ProgressBar progressBar;
     private LocationRequest locationRequest;
 
@@ -50,6 +50,7 @@ public class Home extends AppCompatActivity {
         createElements();
         clickLogout();
         clickMyLocation();
+        clickNewLocation();
     }
 
 
@@ -80,6 +81,17 @@ public class Home extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void clickNewLocation(){
+        buttonHomeNewLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Home.this, MockLocationMenu.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
 
@@ -255,7 +267,7 @@ public class Home extends AppCompatActivity {
         buttonHomeLogout = findViewById(R.id.buttonHomeLogout);
         buttonHomeMyLocation = findViewById(R.id.buttonHomeMyLocation);
         progressBar = findViewById(R.id.progressBarHome);
-
+        buttonHomeNewLocation = findViewById(R.id.buttonHomeNewLocation);
         locationRequest = LocationRequest.create();
         //get an accurate location
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);

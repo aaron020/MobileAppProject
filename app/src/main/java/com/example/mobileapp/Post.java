@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class Post implements Comparable<Post>, Parcelable {
     private String id;
+    private int typeChosen;
     private String title;
     private String description;
     private String userId;
@@ -38,7 +39,7 @@ public class Post implements Comparable<Post>, Parcelable {
         longitude = in.readDouble();
     }
 
-    public Post(String id,String username,String title, String description, String userId, double latitude, double longitude) {
+    public Post(String id,String username,String title, String description, String userId, double latitude, double longitude, int typeChosen) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -47,6 +48,7 @@ public class Post implements Comparable<Post>, Parcelable {
         this.latitude = latitude;
         this.username = username;
         this.timestamp = System.currentTimeMillis();
+        this.typeChosen = typeChosen;
 //        UserData user = new UserData();
 //        user.findUsername(userId);
 //        userName = user.getUsername();
@@ -92,6 +94,9 @@ public class Post implements Comparable<Post>, Parcelable {
         return userId;
     }
 
+    public int getTypeChosen() {
+        return typeChosen;
+    }
 
     public double getLongitude() {
         return longitude;
@@ -135,6 +140,8 @@ public class Post implements Comparable<Post>, Parcelable {
     public int describeContents() {
         return 0;
     }
+
+
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {

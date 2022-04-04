@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".myLocationMap" >
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Mockmap"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MockLocationMap" />
+
+
+    <Button
+        android:id="@+id/buttonSaveLocation"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:text="Save Location"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/editTextSavedLocationTitle"
+        android:layout_width="match_parent"
+        android:hint="Title"
+        android:maxLength="30"
+        android:padding="15dp"
+        android:background="@drawable/custom_input"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:visibility="invisible"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginTop="70dp"/>
+
+
+</FrameLayout>

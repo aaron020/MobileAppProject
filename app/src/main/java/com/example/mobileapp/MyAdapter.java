@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,7 +18,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     private ArrayList<Post> posts;
 //    private ArrayList<String> usernames;
     private Context ct;
+    private int[] typeOfPosts = {R.mipmap.ic_helpful_round, R.mipmap.ic_informative_round, R.mipmap.ic_curious_round,
+                                R.mipmap.ic_event_round, R.mipmap.ic_academic_round, R.mipmap.ic_weather_round, R.mipmap.ic_otheroption_round};
     private OnPostListener mOnPostListener;
+
 
     public MyAdapter(ArrayList<Post> posts,Context ct, OnPostListener onPostListener) {
         this.posts = posts;
@@ -47,6 +51,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         String distance = d.distanceToString(Location.latitude,Location.longitude,posts.get(position).getLatitude(),posts.get(position).getLongitude());
         holder.textViewLocation.setText(distance);
         holder.textViewUserData.setText(usernameTime);
+        holder.PostImage.setImageResource(typeOfPosts[posts.get(position).getTypeChosen()-1]);
     }
 
     @Override
@@ -60,6 +65,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         TextView textViewDescription;
         TextView textViewUserData;
         TextView textViewLocation;
+        ImageView PostImage;
+
+
         OnPostListener onPostListener;
         public MyViewHolder(@NonNull View itemView, OnPostListener onPostListener) {
             super(itemView);
@@ -68,6 +76,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
             textViewDescription = itemView.findViewById(R.id.textViewDescription);
             textViewUserData = itemView.findViewById(R.id.textViewUserData);
             textViewLocation = itemView.findViewById(R.id.textViewLocation);
+            PostImage = itemView.findViewById(R.id.PostImage);
             this.onPostListener = onPostListener;
             itemView.setOnClickListener(this);
         }

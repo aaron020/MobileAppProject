@@ -41,7 +41,7 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
 
     private FloatingActionsMenu FAButtonMyLocation;
     private FloatingActionButton FAButtonMenu,FAButtonLocation,FAButtonAdd;
-    private Animation open, close, fromBottom, toBottom;
+    //private Animation open, close, fromBottom, toBottom;
     private boolean isOpen;
 
     private FirebaseFirestore fStore;

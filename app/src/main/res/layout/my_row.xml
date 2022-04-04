@@ -17,7 +17,7 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:id="@+id/PostImage"
-            android:src="@drawable/ic_baseline_emoji_emotions_24"
+            android:src="@mipmap/ic_helpful_round"
             />
 
         <TextView

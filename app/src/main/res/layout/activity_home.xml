@@ -45,7 +45,7 @@
 
     <Button
         android:id="@+id/buttonHomeNewLocation"
-        android:text="New Location"
+        android:text="Mock Location"
 
         android:textStyle="bold"
         android:fontFamily="sans-serif-thin"
