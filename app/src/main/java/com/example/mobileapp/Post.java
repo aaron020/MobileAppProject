@@ -37,6 +37,7 @@ public class Post implements Comparable<Post>, Parcelable {
         id = in.readString();
         latitude = in.readDouble();
         longitude = in.readDouble();
+        typeChosen = in.readInt();
     }
 
     public Post(String id,String username,String title, String description, String userId, double latitude, double longitude, int typeChosen) {
@@ -152,5 +153,6 @@ public class Post implements Comparable<Post>, Parcelable {
         parcel.writeString(id);
         parcel.writeDouble(latitude);
         parcel.writeDouble(longitude);
+        parcel.writeInt(typeChosen);
     }
 }

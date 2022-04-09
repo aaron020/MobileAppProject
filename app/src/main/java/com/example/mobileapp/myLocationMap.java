@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +33,7 @@ public class myLocationMap extends FragmentActivity implements OnMapReadyCallbac
     private ArrayList<Post> posts;
     private Marker markerClicked;
     private String youId;
+    private String[] type = {"helpful_bm", "informative_bm", "curious_bm","event_bm","academic_bm","weather_bm","other_bm"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +58,7 @@ public class myLocationMap extends FragmentActivity implements OnMapReadyCallbac
         LatLng myLocation = new LatLng(Location.latitude, Location.longitude);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation,15));
         MarkerOptions markerOptions = new MarkerOptions().position(myLocation).title("You");
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_academic_foreground));
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap("you_bm",175,175)));
         Marker marker = mMap.addMarker(markerOptions);
         youId = marker.getId();
         buttonViewPost = findViewById(R.id.buttonViewPost);
@@ -64,6 +67,13 @@ public class myLocationMap extends FragmentActivity implements OnMapReadyCallbac
         viewPost();
 
 
+    }
+
+
+    //Function from https://stackoverflow.com/questions/41509791/how-to-fix-custom-size-of-google-maps-marker-in-android
+    public Bitmap resizeBitmap(String drawableName,int width, int height){
+        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(),getResources().getIdentifier(drawableName, "drawable", getPackageName()));
+        return Bitmap.createScaledBitmap(imageBitmap, width, height, false);
     }
 
     private void markerClick(){
@@ -117,9 +127,14 @@ public class myLocationMap extends FragmentActivity implements OnMapReadyCallbac
 
     private void addMarker(Post post){
         LatLng location = new LatLng(post.getLatitude(), post.getLongitude());
-        Marker marker = mMap.addMarker(new MarkerOptions()
-                                        .position(location)
-                                        .title(post.getTitle()).snippet(post.getShortDesc()));
+//        Marker marker = mMap.addMarker(new MarkerOptions()
+//                                        .position(location)
+//                                        .title(post.getTitle()).snippet(post.getShortDesc()));
+
+
+        MarkerOptions markerOptions = new MarkerOptions().position(location).title(post.getTitle()).snippet(post.getShortDesc());
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap(type[post.getTypeChosen()-1],150,150)));
+        Marker marker = mMap.addMarker(markerOptions);
         marker.setTag(post);
     }
 }
