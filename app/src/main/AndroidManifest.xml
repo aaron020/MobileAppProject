@@ -28,7 +28,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBwCB7iDDiR3TKWE6XI0EBH2GqO1JeuPd0" />
+            android:value="" />
 
         <activity
             android:name=".MockLocationMap"
