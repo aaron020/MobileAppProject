@@ -39,7 +39,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Home extends AppCompatActivity {
     private Button buttonHomeLogout;
-    private Button buttonHomeMyLocation, buttonHomeNewLocation;
+    private Button buttonHomeMyLocation, buttonHomeNewLocation, buttonHomeInfo, buttonHomeSettings;
     private ProgressBar progressBar;
     private LocationRequest locationRequest;
 
@@ -51,6 +51,8 @@ public class Home extends AppCompatActivity {
         clickLogout();
         clickMyLocation();
         clickNewLocation();
+        clickInfo();
+        clickSettings();
     }
 
 
@@ -60,6 +62,17 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(Home.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void clickSettings() {
+        buttonHomeSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Home.this, SettingsActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -87,46 +100,27 @@ public class Home extends AppCompatActivity {
         buttonHomeNewLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home.this, MockLocationMenu.class);
+                Intent intent = new Intent(Home.this, SaveLocation.class);
                 startActivity(intent);
                 finish();
             }
         });
     }
 
+    private void clickInfo(){
+        buttonHomeInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Home.this, info.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
 
-//    @RequiresApi(api = Build.VERSION_CODES.M)
-//    private void getLocation() {
-//        FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(Home.this);
-//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-//            if(isGPSEnabled()){
-//                fusedLocationProviderClient.getLastLocation()
-//                        .addOnSuccessListener(new OnSuccessListener<android.location.Location>() {
-//                            @Override
-//                            public void onSuccess(android.location.Location location) {
-//                                if(location == null){
-//                                    Toast.makeText(Home.this, "Unable to find location", Toast.LENGTH_SHORT).show();
-//                                    return;
-//                                }
-//                                Location.latitude = location.getLatitude();
-//                                Location.longitude = location.getLongitude();
-//                                Toast.makeText(Home.this, "Location Found @" + Location.latitude + ", " + Location.longitude, Toast.LENGTH_SHORT).show();
-//                                //Switch to the post page
-//                                Intent intent = new Intent(Home.this, MyLocationPost.class);
-//                                startActivity(intent);
-//                                finish();
-//                            }
-//                        });
-//            }else{
-//                turnOnGPS();
-//            }
-//
-//        }else{
-//            System.out.println("Permisson--------------");
-//            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-//        }
-//
-//    }
+    private void clickMyProfile(){
+
+    }
 
     private void getCurrentLocation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -266,8 +260,10 @@ public class Home extends AppCompatActivity {
 
         buttonHomeLogout = findViewById(R.id.buttonHomeLogout);
         buttonHomeMyLocation = findViewById(R.id.buttonHomeMyLocation);
+        buttonHomeInfo = findViewById(R.id.buttonHomeInfo);
         progressBar = findViewById(R.id.progressBarHome);
         buttonHomeNewLocation = findViewById(R.id.buttonHomeNewLocation);
+        buttonHomeSettings = findViewById(R.id.buttonHomeSettings);
         locationRequest = LocationRequest.create();
         //get an accurate location
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);

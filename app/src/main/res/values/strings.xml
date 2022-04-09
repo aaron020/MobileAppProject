@@ -2,4 +2,6 @@
     <string name="app_name">MobileApp</string>
     <string name="title_activity_my_location_map">myLocationMap</string>
     <string name="title_activity_mock_location_map">MockLocationMap</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

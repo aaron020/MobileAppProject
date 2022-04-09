@@ -1,6 +1,6 @@
 package com.example.mobileapp;
 
-public class Comment {
+public class Comment implements Comparable<Comment> {
     private String username;
     private double timestamp;
     private String text;
@@ -8,7 +8,7 @@ public class Comment {
 
     public Comment(){}
 
-    public Comment(String username, String postId, String text) {
+    public Comment(String username, String postId, String text)  {
         this.username = username;
         this.postId = postId;
         this.timestamp = System.currentTimeMillis();;
@@ -29,5 +29,15 @@ public class Comment {
 
     public String getText() {
         return text;
+    }
+
+    @Override
+    public int compareTo(Comment comment) {
+        if(this.timestamp > comment.timestamp){
+            return -1;
+        }else if (this.timestamp < comment.timestamp){
+            return 1;
+        }
+        return 0;
     }
 }

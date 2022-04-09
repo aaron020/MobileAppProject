@@ -5,10 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SaveLocation">
+    <TextView
+        android:id="@+id/textViewNoSaved"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:text="You currently have no saved locations\nAdd Some!"
+        android:textAlignment="center"
+        android:layout_marginTop="100dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewSavedLocation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp" />
+
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/FAButtonSV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fab_expandDirection="up"
+        app:fab_labelsPosition="left"
+        app:fab_labelStyle="@style/LabelStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/FAButtonMenuSV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/teal_blue"
+            app:fab_title="Menu"
+            app:fab_icon="@drawable/ic_baseline_menu_24" />
+
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/FAButtonMockLocationSV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/teal_blue"
+            app:fab_title="Add Location"
+            app:fab_icon="@drawable/ic_baseline_mock_location" />
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 </androidx.constraintlayout.widget.ConstraintLayout>

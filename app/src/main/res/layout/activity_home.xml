@@ -1,111 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home"
-    android:background="@color/grey">
+    android:fillViewport="true">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Home"
+        android:background="@color/grey">
 
-    <Button
-        android:id="@+id/buttonHomeInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Info"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-thin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"
-        android:width="200dp"
-        android:height="80dp"
-        android:gravity="bottom|center_horizontal"
-        android:drawableTop="@drawable/ic_baseline_info_24"
-        />
 
-    <Button
-        android:id="@+id/buttonHomeMyLocation"
-        android:text="My Location"
+        <Button
+            android:id="@+id/buttonHomeInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Info"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-thin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="30dp"
+            android:width="300dp"
+            android:height="100dp"
+            android:gravity="bottom|center_horizontal"
+            android:drawableTop="@drawable/ic_baseline_info_24"
+            />
 
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-thin"
-        android:gravity="bottom|center_horizontal"
-        android:layout_marginTop="20dp"
-        android:width="200dp"
-        android:height="80dp"
-        android:drawableTop="@drawable/ic_baseline_location_on_24"
+        <Button
+            android:id="@+id/buttonHomeMyProfile"
+            android:text="My Profile"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonHomeInfo"
-        />
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="bottom|center_horizontal"
+            android:layout_marginTop="50dp"
+            android:width="300dp"
+            android:height="100dp"
+            android:drawableTop="@drawable/ic_baseline_profile"
 
-    <Button
-        android:id="@+id/buttonHomeNewLocation"
-        android:text="Mock Location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonHomeInfo"
+            />
 
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-thin"
-        android:gravity="bottom|center_horizontal"
-        android:layout_marginTop="20dp"
-        android:width="200dp"
-        android:height="80dp"
-        android:drawableTop="@drawable/ic_baseline_add_location_24"
+        <Button
+            android:id="@+id/buttonHomeMyLocation"
+            android:text="My Location"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonHomeMyLocation"
-        />
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="bottom|center_horizontal"
+            android:layout_marginTop="50dp"
+            android:width="300dp"
+            android:height="100dp"
+            android:drawableTop="@drawable/ic_baseline_location_on_24"
 
-    <Button
-        android:id="@+id/buttonHomeSettings"
-        android:text="Settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonHomeMyProfile"
+            />
 
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-thin"
-        android:gravity="bottom|center_horizontal"
-        android:layout_marginTop="20dp"
-        android:width="200dp"
-        android:height="80dp"
-        android:drawableTop="@drawable/ic_baseline_settings_24"
+        <Button
+            android:id="@+id/buttonHomeNewLocation"
+            android:text="Mock Location"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonHomeNewLocation" />
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="bottom|center_horizontal"
+            android:layout_marginTop="50dp"
+            android:width="300dp"
+            android:height="100dp"
+            android:drawableTop="@drawable/ic_baseline_add_location_24"
 
-    <Button
-        android:id="@+id/buttonHomeLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:width="100dp"
-        android:height="80dp"
-        android:drawableTop="@drawable/ic_baseline_exit_to_app_24"
-        android:fontFamily="sans-serif-thin"
-        android:gravity="bottom|center_horizontal"
-        android:text="Logout"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonHomeSettings" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonHomeMyLocation"
+            />
 
-    <ProgressBar
-        android:id="@+id/progressBarHome"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonHomeLogout" />
+        <Button
+            android:id="@+id/buttonHomeSettings"
+            android:text="Settings"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="bottom|center_horizontal"
+            android:layout_marginTop="50dp"
+            android:width="300dp"
+            android:height="100dp"
+            android:drawableTop="@drawable/ic_baseline_settings_24"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonHomeNewLocation" />
+
+        <Button
+            android:id="@+id/buttonHomeLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:width="100dp"
+            android:height="80dp"
+            android:drawableTop="@drawable/ic_baseline_exit_to_app_24"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="bottom|center_horizontal"
+            android:text="Logout"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonHomeSettings" />
+
+        <ProgressBar
+            android:id="@+id/progressBarHome"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonHomeMyLocation" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

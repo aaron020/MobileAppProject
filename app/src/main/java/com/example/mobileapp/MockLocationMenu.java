@@ -15,6 +15,7 @@ public class MockLocationMenu extends AppCompatActivity {
         setContentView(R.layout.activity_mock_location_menu);
         createElements();
         newMockClicked();
+        savedLocationClicked();
     }
 
     private void createElements(){
@@ -29,6 +30,16 @@ public class MockLocationMenu extends AppCompatActivity {
                 Intent intent = new Intent(MockLocationMenu.this, MockLocationMap.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+    }
+
+    private void savedLocationClicked(){
+        buttonMockSaved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MockLocationMenu.this, SaveLocation.class);
+                startActivity(i);
             }
         });
     }

@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MobileApp">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".info"
+            android:exported="false" />
+        <activity
             android:name=".SaveLocation"
             android:exported="false" />
 

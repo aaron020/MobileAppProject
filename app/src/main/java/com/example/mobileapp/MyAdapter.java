@@ -54,6 +54,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         holder.PostImage.setImageResource(typeOfPosts[posts.get(position).getTypeChosen()-1]);
     }
 
+//    private ArrayList<Post> manageDistance(ArrayList<Post> posts_In){
+//        Distance dist = new Distance();
+//        ArrayList<Post> postsArranged = new ArrayList<>();
+//        for(int i = 0; i < posts_In.size(); i++){
+//            if(dist.distance(Location.latitude, Location.longitude, posts_In.get(i).getLatitude(),posts_In.get(i).getLongitude()) <= Settings.Distance){
+//                postsArranged.add(posts_In.get(i));
+//            }
+//        }
+//        return postsArranged;
+//    }
+
     @Override
     public int getItemCount() {
         return posts.size();

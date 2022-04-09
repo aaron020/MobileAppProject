@@ -8,7 +8,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".addPost">
+        tools:context=".addPost"
+        android:background="@color/grey">
 
         <ImageButton
             android:id="@+id/buttonAddPostToMLP"
@@ -20,6 +21,7 @@
             app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
         <TextView
+            android:textColor="@color/white"
             android:id="@+id/textViewTypeOfPost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,6 +33,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
+            android:textColor="@color/white"
             android:id="@+id/spinnerTypeOfPost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,6 +43,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewTypeOfPost" />
 
         <TextView
+            android:textColor="@color/white"
             android:id="@+id/textViewPostTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,6 +56,7 @@
             app:layout_constraintTop_toBottomOf="@+id/spinnerTypeOfPost" />
 
         <EditText
+            android:textColor="@color/white"
             android:maxLength="25"
             android:id="@+id/editTextPostTitle"
             android:layout_width="wrap_content"
@@ -66,6 +71,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewPostTitle" />
 
         <TextView
+            android:textColor="@color/white"
             android:id="@+id/textViewTextAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,6 +84,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editTextPostTitle" />
 
         <TextView
+            android:textColor="@color/white"
             android:id="@+id/textViewPostDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -90,6 +97,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editTextPostTitle" />
 
         <EditText
+            android:textColor="@color/white"
             android:id="@+id/editTextPostDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,7 +125,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextPostDescription" />
 
-
+        <CheckBox
+            android:textColor="@color/white"
+            android:id="@+id/checkBoxExactLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:text="Use My Exact Location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonPost" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

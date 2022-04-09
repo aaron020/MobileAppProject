@@ -21,6 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:id="@+id/editTextRegisterUsername"
         android:layout_width="300dp"
@@ -38,6 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewRegister" />
 
     <EditText
+        android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:id="@+id/editTextRegisterEmailAddress"
         android:layout_width="300dp"
@@ -55,6 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextRegisterUsername" />
 
     <EditText
+        android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:id="@+id/editTextRegisterPassword"
         android:layout_width="300dp"
@@ -70,6 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextRegisterEmailAddress" />
 
     <EditText
+        android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:id="@+id/editTextRegisterPasswordConfirm"
         android:layout_width="300dp"

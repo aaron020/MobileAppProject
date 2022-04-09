@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/drawable/bg_label.xml" value="0.1" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/drawable/ic_academic_foreground.xml" value="0.3365" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/drawable/ic_baseline_add_location_24.xml" value="0.3675" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/drawable/ic_baseline_create_24.xml" value="0.206" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.336" />
@@ -12,14 +13,17 @@
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.3675" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.3675" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.206" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/drawable/ic_baseline_profile.xml" value="0.3365" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.3675" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/drawable/ic_curious_foreground.xml" value="0.248" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2505" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/drawable/ic_other_foreground.xml" value="0.248" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/drawable/round_corner.xml" value="0.1" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/activity_add_comment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/activity_add_post.xml" value="0.33" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/activity_detailed_post.xml" value="0.25" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/activity_home.xml" value="0.33" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/activity_info.xml" value="0.22" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/activity_mock_location_map.xml" value="0.15729166666666666" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/activity_mock_location_menu.xml" value="0.3333333333333333" />
@@ -29,6 +33,10 @@
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/activity_open_post.xml" value="0.1" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/activity_register.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/activity_save_location.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/activity_settings.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/fragment_info_pg1.xml" value="0.1" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/fragment_info_pg2.xml" value="0.1" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/mock_location_dialog.xml" value="0.22" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/my_comment.xml" value="0.338768115942029" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/my_locations.xml" value="0.49343832020997375" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/MobileApp/app/src/main/res/layout/my_row.xml" value="0.33" />

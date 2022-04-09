@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -35,12 +36,14 @@ public class addPost extends AppCompatActivity {
     private EditText editTextPostTitle , editTextPostDescription;
     private TextView textViewPostTitle, textViewPostDescription, textViewTextAmount;
     private Spinner spinnerTypeOfPost;
+    private CheckBox checkBoxExactLocation;
     private Button buttonPost;
     private ImageButton buttonAddPostToMLP;
     private String username;
     private String[] typeOfPosts = {"Choose","Helpful","Informative","Curious","Event","Academic","Weather","Other"};
     private int typeChosen;
     FirebaseFirestore fStore;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,7 @@ public class addPost extends AppCompatActivity {
         textViewPostDescription.setVisibility(i);
         buttonPost.setVisibility(i);
         textViewTextAmount.setVisibility(i);
+        checkBoxExactLocation.setVisibility(i);
     }
 
     private void textListeners(){
@@ -100,6 +104,7 @@ public class addPost extends AppCompatActivity {
 
 
 
+
     private void createElements(){
         editTextPostTitle = findViewById(R.id.editTextPostTitle);
         textViewPostTitle = findViewById(R.id.textViewPostTitle);
@@ -112,6 +117,7 @@ public class addPost extends AppCompatActivity {
         textViewTextAmount = findViewById(R.id.textViewTextAmount);
         ArrayAdapter types = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,typeOfPosts);
         spinnerTypeOfPost.setAdapter(types);
+        checkBoxExactLocation = findViewById(R.id.checkBoxExactLocation);
 
     }
 
@@ -147,6 +153,11 @@ public class addPost extends AppCompatActivity {
         });
     }
 
+    private double distortLocation(double coord){
+        double distortion = Math.random()/Settings.Distort_Factor;
+        return coord + distortion;
+    }
+
 
     public void addToDb(String userId,String title, String description){
         DocumentReference docRead;
@@ -159,7 +170,13 @@ public class addPost extends AppCompatActivity {
                 DocumentReference dr = fStore.getInstance().collection("posts").document();
                 String id = dr.getId();
                 System.out.println(id);
-                Post newPost = new Post(id,username,title,description,userId,Location.latitude,Location.longitude, typeChosen);
+                Post newPost;
+                if(checkBoxExactLocation.isChecked()){
+                    newPost = new Post(id,username,title,description,userId,Location.latitude,Location.longitude, typeChosen);
+                }else{
+                    newPost = new Post(id,username,title,description,userId,distortLocation(Location.latitude),distortLocation(Location.longitude), typeChosen);
+                }
+
                 fStore.collection("posts").document(id).set(newPost).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

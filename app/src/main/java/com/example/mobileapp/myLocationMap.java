@@ -55,7 +55,7 @@ public class myLocationMap extends FragmentActivity implements OnMapReadyCallbac
         LatLng myLocation = new LatLng(Location.latitude, Location.longitude);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation,15));
         MarkerOptions markerOptions = new MarkerOptions().position(myLocation).title("You");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_academic_foreground));
         Marker marker = mMap.addMarker(markerOptions);
         youId = marker.getId();
         buttonViewPost = findViewById(R.id.buttonViewPost);

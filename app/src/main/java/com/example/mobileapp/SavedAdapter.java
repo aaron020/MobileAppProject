@@ -55,6 +55,7 @@ public class SavedAdapter extends RecyclerView.Adapter<SavedAdapter.MyViewHolder
         TextView textViewLocationCoords;
 
 
+
         OnPostListener onPostListener;
         public MyViewHolder(@NonNull View itemView, OnPostListener onPostListener) {
             super(itemView);
