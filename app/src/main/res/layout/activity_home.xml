@@ -33,7 +33,7 @@
 
         <Button
             android:id="@+id/buttonHomeMyProfile"
-            android:text="My Profile"
+            android:text="My Posts"
 
             android:textStyle="bold"
             android:fontFamily="sans-serif-thin"

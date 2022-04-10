@@ -8,6 +8,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -39,9 +40,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Home extends AppCompatActivity {
     private Button buttonHomeLogout;
-    private Button buttonHomeMyLocation, buttonHomeNewLocation, buttonHomeInfo, buttonHomeSettings;
+    private Button buttonHomeMyLocation, buttonHomeNewLocation, buttonHomeInfo, buttonHomeSettings, buttonHomeMyProfile;
     private ProgressBar progressBar;
     private LocationRequest locationRequest;
+    private Boolean userPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class Home extends AppCompatActivity {
         clickNewLocation();
         clickInfo();
         clickSettings();
+        clickMyProfile();
     }
 
 
@@ -67,6 +70,8 @@ public class Home extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void clickSettings() {
         buttonHomeSettings.setOnClickListener(new View.OnClickListener() {
@@ -85,12 +90,9 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
+                userPost = false;
                 //getCurrentLocation();
                 getCurrentLocation();
-                //Delay the code while it finds the users location
-
-
-
             }
         });
 
@@ -101,6 +103,7 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Home.this, SaveLocation.class);
+//                Bundle b = ActivityOptions.makeSceneTransitionAnimation(Home.this).toBundle();
                 startActivity(intent);
                 finish();
             }
@@ -119,7 +122,16 @@ public class Home extends AppCompatActivity {
     }
 
     private void clickMyProfile(){
-
+        buttonHomeMyProfile.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
+                userPost = true;
+                //getCurrentLocation();
+                getCurrentLocation();
+            }
+        });
     }
 
     private void getCurrentLocation() {
@@ -145,6 +157,13 @@ public class Home extends AppCompatActivity {
                                         Toast.makeText(Home.this, "Location Found @" + Location.latitude + ", " + Location.longitude, Toast.LENGTH_SHORT).show();
                                         //Switch to the post page
                                         Intent intent = new Intent(Home.this, MyLocationPost.class);
+
+                                        //Bundle that will tell the activity if the user wants to see their own posts or if they want to see other peoples posts
+                                        Bundle b = new Bundle();
+                                        b.putBoolean("UserPosts",userPost);
+                                        intent.putExtras(b);
+
+
                                         startActivity(intent);
                                         finish();
                                         //AddressText.setText(coords[0] + "  " + coords[1]);
@@ -257,13 +276,13 @@ public class Home extends AppCompatActivity {
 
 
     private void createElements(){
-
         buttonHomeLogout = findViewById(R.id.buttonHomeLogout);
         buttonHomeMyLocation = findViewById(R.id.buttonHomeMyLocation);
         buttonHomeInfo = findViewById(R.id.buttonHomeInfo);
         progressBar = findViewById(R.id.progressBarHome);
         buttonHomeNewLocation = findViewById(R.id.buttonHomeNewLocation);
         buttonHomeSettings = findViewById(R.id.buttonHomeSettings);
+        buttonHomeMyProfile = findViewById(R.id.buttonHomeMyProfile);
         locationRequest = LocationRequest.create();
         //get an accurate location
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);

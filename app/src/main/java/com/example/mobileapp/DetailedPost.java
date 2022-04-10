@@ -45,6 +45,8 @@ public class DetailedPost extends AppCompatActivity {
     private Button buttonAddComment;
     private ListenerRegistration listenerRegistration;
 
+    private boolean userDP;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class DetailedPost extends AppCompatActivity {
         createElements();
         addComment();
         bundle = getIntent().getExtras();
+        userDP = bundle.getBoolean("UserDP");
         clickLess();
         clickMore();
         clickBack();
@@ -169,6 +172,9 @@ public class DetailedPost extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DetailedPost.this, MyLocationPost.class);
+                Bundle b = new Bundle();
+                b.putBoolean("UserPosts",userDP);
+                intent.putExtras(b);
                 startActivity(intent);
                 finish();
             }

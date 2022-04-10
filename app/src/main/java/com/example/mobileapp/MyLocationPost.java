@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -58,14 +59,33 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
     private ListenerRegistration listenerRegistration;
 
     private TextView textViewNoPosts;
+    private Boolean userPosts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_location_post);
         createElements();
-        EventChange();
+
+        Bundle bundle = getIntent().getExtras();
+        userPosts = bundle.getBoolean("UserPosts");
+
+        if(userPosts){
+            FloatingButtons(View.GONE);
+            UserPosts();
+        }else{
+            FloatingButtons(View.VISIBLE);
+            EventChange();
+        }
+
+
         floatingButton();
+    }
+
+    private void FloatingButtons(int i){
+        FAButtonAdd.setVisibility(i);
+        FAButtonLocation.setVisibility(i);
+        FAButtonMockLocation.setVisibility(i);
     }
 
     private void floatingButton(){
@@ -174,6 +194,37 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
 
     }
 
+
+    private void UserPosts() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        listenerRegistration = fStore.collection("posts").whereEqualTo("userId",userId)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if(error != null){
+                            Log.d(TAG, "error : " + error.getMessage());
+                        }
+                        ArrayList<Post> postsFromDB = new ArrayList<>();
+                        for(DocumentChange dc : value.getDocumentChanges()){
+                            if(dc.getType() == DocumentChange.Type.ADDED){
+                                posts.add(dc.getDocument().toObject(Post.class));
+                            }
+                        }
+                        recyclerView = findViewById(R.id.recyclerviewMyLocation);
+                        Collections.sort(posts);
+                        if(posts.size() == 0){
+                            textViewNoPosts.setVisibility(View.VISIBLE);
+                        }else{
+                            textViewNoPosts.setVisibility(View.GONE);
+                        }
+                        MyAdapter myAdapter = new MyAdapter(posts,MyLocationPost.this, MyLocationPost.this);
+                        recyclerView.setAdapter(myAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(MyLocationPost.this));
+                    }
+                });
+
+    }
+
     private ArrayList<Post> manageDistance(ArrayList<Post> posts_In){
         Distance dist = new Distance();
         ArrayList<Post> postsArranged = new ArrayList<>();
@@ -209,6 +260,9 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
     public void onPostClick(int position) {
         System.out.println(position);
         Intent i = new Intent(this, DetailedPost.class);
+        Bundle b = new Bundle();
+        b.putBoolean("UserDP",userPosts);
+        i.putExtras(b);
         //Send the info of the post to the next activity
         i.putExtra("post", posts.get(position));
         startActivity(i);
