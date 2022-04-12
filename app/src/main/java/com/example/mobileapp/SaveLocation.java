@@ -123,6 +123,9 @@ public class SaveLocation extends AppCompatActivity implements SavedAdapter.OnPo
         Toast.makeText(SaveLocation.this, "Opening Location @" + Location.latitude + ", " + Location.longitude, Toast.LENGTH_SHORT).show();
         //Switch to the post page
         Intent intent = new Intent(SaveLocation.this, MyLocationPost.class);
+        Bundle b = new Bundle();
+        b.putBoolean("UserPosts",false);
+        intent.putExtras(b);
         startActivity(intent);
         finish();
     }

@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -27,6 +30,9 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.io.IOException;
+import java.util.List;
+
 public class MockLocationMap extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -34,6 +40,7 @@ public class MockLocationMap extends FragmentActivity implements OnMapReadyCallb
     private Button buttonSaveLocation;
     private EditText editTextSavedLocationTitle;
     private FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+    private FloatingActionButton FAButtonCancelMockLM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +66,27 @@ public class MockLocationMap extends FragmentActivity implements OnMapReadyCallb
                 editTextSavedLocationTitle.setVisibility(View.VISIBLE);
                 Location.savedLatitude = latLng.latitude;
                 Location.savedLongitude = latLng.longitude;
+                editTextSavedLocationTitle.setText(geoCoding());
             }
         });
+    }
+
+    private String geoCoding(){
+        Geocoder geoCoder = new Geocoder(this);
+        List<Address> matches = null;
+        try {
+            matches = geoCoder.getFromLocation(Location.savedLatitude, Location.savedLongitude, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(matches.isEmpty()){
+            return "Somewhere";
+        }
+        Address bestMatch = matches.get(0);
+
+        return bestMatch.getAddressLine(0);
+
+
     }
 
     private void savedLocation(){
@@ -93,6 +119,17 @@ public class MockLocationMap extends FragmentActivity implements OnMapReadyCallb
         });
     }
 
+    private void FAButtonClicked(){
+        FAButtonCancelMockLM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MockLocationMap.this, SaveLocation.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
 
 
 
@@ -104,6 +141,9 @@ public class MockLocationMap extends FragmentActivity implements OnMapReadyCallb
         mapClick();
         buttonSaveLocation = findViewById(R.id.buttonSaveLocation);
         editTextSavedLocationTitle = findViewById(R.id.editTextSavedLocationTitle);
+        FAButtonCancelMockLM = findViewById(R.id.FAButtonCancelMockLM);
         savedLocation();
+        FAButtonClicked();
+
     }
 }

@@ -6,16 +6,20 @@ import androidx.fragment.app.FragmentActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -34,6 +38,7 @@ public class myLocationMap extends FragmentActivity implements OnMapReadyCallbac
     private Marker markerClicked;
     private String youId;
     private String[] type = {"helpful_bm", "informative_bm", "curious_bm","event_bm","academic_bm","weather_bm","other_bm"};
+    private FloatingActionButton FAButtonCancelMLM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,13 +65,35 @@ public class myLocationMap extends FragmentActivity implements OnMapReadyCallbac
         MarkerOptions markerOptions = new MarkerOptions().position(myLocation).title("You");
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(resizeBitmap("you_bm",175,175)));
         Marker marker = mMap.addMarker(markerOptions);
+        Circle circle = mMap.addCircle(new CircleOptions()
+                .center(myLocation)
+                .radius(Settings.Distance * 1000)
+                .strokeColor(Color.RED)
+                .fillColor(Color.parseColor("#2271cce7")));
         youId = marker.getId();
         buttonViewPost = findViewById(R.id.buttonViewPost);
+        FAButtonCancelMLM = findViewById(R.id.FAButtonCancelMLM);
         addMarkers();
         markerClick();
         viewPost();
+        FAButtonClick();
 
 
+    }
+
+
+    private void FAButtonClick(){
+        FAButtonCancelMLM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(myLocationMap.this, MyLocationPost.class);
+                Bundle b = new Bundle();
+                b.putBoolean("UserPosts",false);
+                intent.putExtras(b);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
 
