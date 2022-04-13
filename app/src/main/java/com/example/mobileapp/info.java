@@ -5,12 +5,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 public class info extends AppCompatActivity {
-    Button buttonPrevious, buttonNext;
+    Button buttonPrevious, buttonNext, buttonInfoMenu;
 
 
     @Override
@@ -21,11 +22,13 @@ public class info extends AppCompatActivity {
         changeInfo(new info_pg1());
         clickNext();
         clickPrevious();
+        clickMenu();
     }
 
     private void createElements(){
         buttonPrevious = findViewById(R.id.buttonPrevious);
         buttonNext = findViewById(R.id.buttonNext);
+        buttonInfoMenu = findViewById(R.id.buttonInfoMenu);
     }
 
     private void clickNext(){
@@ -42,6 +45,17 @@ public class info extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayoutInfo, fragment);
         fragmentTransaction.commit();
+    }
+
+    private void clickMenu(){
+        buttonInfoMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(info.this, Home.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void clickPrevious(){
