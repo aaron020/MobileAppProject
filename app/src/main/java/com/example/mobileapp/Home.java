@@ -37,7 +37,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-
+/*
+The main menu of the app, the user can access all funcationality of the app from here
+ */
 public class Home extends AppCompatActivity {
     private Button buttonHomeLogout;
     private Button buttonHomeMyLocation, buttonHomeNewLocation, buttonHomeInfo, buttonHomeSettings, buttonHomeMyProfile;
@@ -58,7 +60,9 @@ public class Home extends AppCompatActivity {
         clickMyProfile();
     }
 
-
+/*
+User wants to log out of the app - use firebase signout function then bring user back to the login
+ */
     private void clickLogout() {
         buttonHomeLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +76,9 @@ public class Home extends AppCompatActivity {
     }
 
 
-
+/*
+Clicked on the apps settings button
+ */
     private void clickSettings() {
         buttonHomeSettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +89,10 @@ public class Home extends AppCompatActivity {
             }
         });
     }
-
+/*
+Clicked on My Location button - userPost is false because we want to see posts from other users
+no just the user logged in
+ */
     private void clickMyLocation() {
         buttonHomeMyLocation.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -97,7 +106,9 @@ public class Home extends AppCompatActivity {
         });
 
     }
-
+/*
+Enter the saved locations menu
+ */
     private void clickNewLocation(){
         buttonHomeNewLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +131,9 @@ public class Home extends AppCompatActivity {
             }
         });
     }
-
+/*
+View only posts made by the user logged in  - userPost is true
+ */
     private void clickMyProfile(){
         buttonHomeMyProfile.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -133,7 +146,9 @@ public class Home extends AppCompatActivity {
             }
         });
     }
-
+/*
+First asks the user to turn on GPS and location services - then finds the users current location
+ */
     private void getCurrentLocation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -166,7 +181,7 @@ public class Home extends AppCompatActivity {
 
                                         startActivity(intent);
                                         finish();
-                                        //AddressText.setText(coords[0] + "  " + coords[1]);
+
 
 
 

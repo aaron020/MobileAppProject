@@ -27,7 +27,9 @@ import com.example.mobileapp.databinding.ActivityMyLocationMapBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/*
+Map which displays the users current location , also displays all posts around the user
+ */
 public class myLocationMap extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -37,6 +39,7 @@ public class myLocationMap extends FragmentActivity implements OnMapReadyCallbac
     private ArrayList<Post> posts;
     private Marker markerClicked;
     private String youId;
+    //Names of each of the icons
     private String[] type = {"helpful_bm", "informative_bm", "curious_bm","event_bm","academic_bm","weather_bm","other_bm"};
     private FloatingActionButton FAButtonCancelMLM;
     @Override

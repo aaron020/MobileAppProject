@@ -27,7 +27,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
+/*
+Recycler view for all saved locations by the user
+ */
 public class SaveLocation extends AppCompatActivity implements SavedAdapter.OnPostListener{
     private RecyclerView recyclerView;
     private FirebaseFirestore fStore;
@@ -79,7 +81,9 @@ public class SaveLocation extends AppCompatActivity implements SavedAdapter.OnPo
         });
     }
 
-
+/*
+This function gets all saved locations from the database that have a userId that matches the user logged in
+ */
     private void EventChange() {
         listenerRegistration = fStore.collection("locations").whereEqualTo("userId",userId)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -94,6 +98,7 @@ public class SaveLocation extends AppCompatActivity implements SavedAdapter.OnPo
                                 savedLocations.add(dc.getDocument().toObject(savedLocation.class));
                             }
                         }
+                        //If there is no saved locations then tell the user this
                         if(savedLocations.size() == 0){
                             textViewNoSaved.setVisibility(View.VISIBLE);
                         }else{
@@ -115,7 +120,9 @@ public class SaveLocation extends AppCompatActivity implements SavedAdapter.OnPo
     }
 
 
-
+/*
+On click event for saved location - when it is clicked it opens the posts that are around this location
+ */
     @Override
     public void onPostClick(int position) {
         Location.latitude = savedLocations.get(position).getLatitude();
@@ -129,7 +136,9 @@ public class SaveLocation extends AppCompatActivity implements SavedAdapter.OnPo
         startActivity(intent);
         finish();
     }
-
+/*
+called when the activity is stopped
+ */
     @Override
     protected void onStop() {
         super.onStop();

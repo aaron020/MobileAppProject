@@ -8,15 +8,15 @@
         the forums are location based. The main idea for this app is to allow people traveling to new places
     access to information from the local people, it also allows local people to communicate with people in their
     area and organise events, ask questions, discuss different topics and many other things. \n\n Main Menu: \n
-    The main menu will be presented to the user when they first login to the app, hear you can navigate through the app and acess the
+    The main menu will be presented to the user when they first login to the app, here you can navigate through the app and acess the
     different functionality \n\n My Posts: \n This will allow a user to see all posts they have made, the distance from the current location that each
     post was made will be displayed, how long ago the post was made will also be displayed \n\n My Location: \n Using the users current location and the distance
-    the user has set in the Settings menu, the user will be presented with all posted made around them in their current location. They can add a post in
+    the user has set in the Settings menu, the user will be presented with all posts made around them in their current location. They can add a post in
     their location and comment on posts in their current location \n\n Mock Location:\n If a user would like to see posts in a location that they are not currently
     in, they can create a new mock location and access posts in this location \n\n Settings: \n Here a user can change the max distance a post can be from
     their current location or their mock location. A user can also change the distortion factor when making a post in settings</string>
     <string name="info_pg2_desc">Distortion Factor: \nFor security reasons it is not a good idea to use a users exact location when they making a post(Although
         they can choose to user their exact location), the distortion factor will change your location a high to low amount depending on what you choose
     in settings \n\n Making a post: \n Users can add a post by clicking the Add Post button, here you will need to choose the type of post you are going to make,
-    the post will be displayed with a different icon depending on what type you choose</string>
+    the post will be displayed with a different icon depending on what type you choose,</string>
 </resources>

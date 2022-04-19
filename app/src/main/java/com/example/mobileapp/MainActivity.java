@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private String password;
     private boolean emailFilled = false;
     private boolean passwordFilled = false;
+    //Min password length
     private final int PASS_LENGTH = 6;
 
     @Override

@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-
+/*
+Adpater for the saved locations recycler view
+ */
 public class SavedAdapter extends RecyclerView.Adapter<SavedAdapter.MyViewHolder>{
     private ArrayList<savedLocation> savedLocations;
     private Context ct;

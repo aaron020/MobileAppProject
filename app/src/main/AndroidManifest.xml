@@ -35,29 +35,17 @@
             android:exported="false"
             android:label="@string/title_activity_mock_location_map" />
         <activity
-            android:name=".MockLocationMenu"
-            android:exported="false" />
-        <activity
             android:name=".myLocationMap"
             android:exported="false"
             android:label="@string/title_activity_my_location_map" />
         <activity
-            android:name=".addComment"
-            android:exported="false" />
-        <activity
             android:name=".DetailedPost"
-            android:exported="false" />
-        <activity
-            android:name=".OpenPost"
             android:exported="false" />
         <activity
             android:name=".addPost"
             android:exported="false" />
         <activity
             android:name=".MyLocationPost"
-            android:exported="false" />
-        <activity
-            android:name=".MyLocation"
             android:exported="false" />
         <activity
             android:name=".Home"

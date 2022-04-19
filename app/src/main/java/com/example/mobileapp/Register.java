@@ -25,7 +25,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/*
+Register an account on firebase
+ */
 public class Register extends AppCompatActivity {
     EditText editTextRegisterUsername;
     EditText editTextRegisterEmailAddress;

@@ -40,14 +40,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
+/*
+Main page of the app, allows the user to see posts from users around them, also allows the user to
+see just their own posts
+ */
 public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPostListener {
     private RecyclerView recyclerView;
 
     private FloatingActionsMenu FAButtonMyLocation;
     private FloatingActionButton FAButtonMenu,FAButtonLocation,FAButtonAdd, FAButtonMockLocation;
-    //private Animation open, close, fromBottom, toBottom;
-    private boolean isOpen;
+
+
 
     private FirebaseFirestore fStore;
     private ArrayList<Post> posts;
@@ -66,12 +69,13 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_location_post);
         createElements();
-
+        //If UserPosts bundle is true then only the users posts will displayed
         Bundle bundle = getIntent().getExtras();
         userPosts = bundle.getBoolean("UserPosts");
 
         if(userPosts){
             FloatingButtons(View.GONE);
+            //Gets all and only the user thats logged in posts from the db
             UserPosts();
         }else{
             FloatingButtons(View.VISIBLE);
@@ -122,7 +126,10 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
             }
         });
     }
-
+    /*
+    If user clicks on new mock location a dialog box pops up asking them if they would like to
+    view their saved locations or create a new mock location
+     */
     private void newDialog(){
         dialogBox = new AlertDialog.Builder(this);
         final View MockLocationDialog = getLayoutInflater().inflate(R.layout.mock_location_dialog, null);
@@ -162,7 +169,9 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
 
 
 
-
+/*
+This function gets all posts from the db and stores them in an arraylist
+ */
     private void EventChange() {
         listenerRegistration = fStore.collection("posts")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -179,9 +188,12 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
                 }
 
                 recyclerView = findViewById(R.id.recyclerviewMyLocation);
+                //Removes any post that is outside the maxiumum distance set in settings
                 posts = manageDistance(postsFromDB);
+                //Sorts the posts by time
                 Collections.sort(posts);
                 if(posts.size() == 0){
+                    //There is no posts - tell the user this
                     textViewNoPosts.setVisibility(View.VISIBLE);
                 }else{
                     textViewNoPosts.setVisibility(View.GONE);
@@ -224,7 +236,10 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
                 });
 
     }
-
+    /*
+    Loops through the array of posts and calculates how far away each post is
+    only adds posts that are in the set distance and then returns the new arraylist
+     */
     private ArrayList<Post> manageDistance(ArrayList<Post> posts_In){
         Distance dist = new Distance();
         ArrayList<Post> postsArranged = new ArrayList<>();
@@ -251,7 +266,6 @@ public class MyLocationPost extends AppCompatActivity implements MyAdapter.OnPos
         FAButtonMockLocation = findViewById(R.id.FAButtonMockLocation);
         FAButtonAdd = findViewById(R.id.FAButtonAdd);
         textViewNoPosts = findViewById(R.id.textViewNoPosts);
-        isOpen = false;
     }
 
 

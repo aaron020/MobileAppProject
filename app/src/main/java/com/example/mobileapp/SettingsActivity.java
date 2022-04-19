@@ -11,7 +11,10 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.util.Set;
-
+/*
+The activity that allows a user to change the settings that are applied - the settings
+will restart everytime the app is closed a reopened
+ */
 public class SettingsActivity extends AppCompatActivity {
     Button buttonSaveChanges;
     RadioGroup radio_distance, radio_distortion;

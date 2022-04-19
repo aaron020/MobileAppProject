@@ -1,5 +1,7 @@
 package com.example.mobileapp;
-
+/*
+Class to store saved locations
+ */
 public class savedLocation {
     private double longitude;
     private double latitude;

@@ -14,7 +14,9 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/*
+Class for storing posts
+ */
 public class Post implements Comparable<Post>, Parcelable {
     private String id;
     private int typeChosen;
@@ -29,6 +31,9 @@ public class Post implements Comparable<Post>, Parcelable {
 
     public Post(){
     }
+    /*
+    ALlows the class but transfered as a bundle between activities
+     */
     protected Post(Parcel in){
         username = in.readString();
         timestamp = in.readDouble();
@@ -81,7 +86,9 @@ public class Post implements Comparable<Post>, Parcelable {
     public String getDescription() {
         return description;
     }
-
+    /*
+    A short description that is displayed if the the normal description is too long
+     */
     public String getShortDesc(){
         if(description.length() > 101){
             return description.substring(0,100) + "...";

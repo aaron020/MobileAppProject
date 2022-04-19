@@ -33,6 +33,9 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import java.io.IOException;
 import java.util.List;
 
+/*
+Map for adding a mock location
+ */
 public class MockLocationMap extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -54,7 +57,9 @@ public class MockLocationMap extends FragmentActivity implements OnMapReadyCallb
                 .findFragmentById(R.id.Mockmap);
         mapFragment.getMapAsync(this);
     }
-
+    /*
+    When the map is clicked a marker is added to the map
+     */
     private void mapClick(){
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -70,7 +75,9 @@ public class MockLocationMap extends FragmentActivity implements OnMapReadyCallb
             }
         });
     }
-
+/*
+Convert the long and lat of the place clicked into a string address
+ */
     private String geoCoding(){
         Geocoder geoCoder = new Geocoder(this);
         List<Address> matches = null;
@@ -88,7 +95,9 @@ public class MockLocationMap extends FragmentActivity implements OnMapReadyCallb
 
 
     }
-
+/*
+Save the location to the db with the users ID
+ */
     private void savedLocation(){
         buttonSaveLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +145,7 @@ public class MockLocationMap extends FragmentActivity implements OnMapReadyCallb
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        //Start the map over ireland - can be changed if the app is used in other countries
         LatLng myLocation = new LatLng(52.6615, -8.62);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation,6));
         mapClick();

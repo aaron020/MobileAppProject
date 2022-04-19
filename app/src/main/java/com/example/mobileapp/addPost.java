@@ -31,7 +31,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.HashMap;
-
+/*
+This class deals with adding a new post to the DB
+ */
 public class addPost extends AppCompatActivity {
     private EditText editTextPostTitle , editTextPostDescription;
     private TextView textViewPostTitle, textViewPostDescription, textViewTextAmount;
@@ -40,7 +42,8 @@ public class addPost extends AppCompatActivity {
     private Button buttonPost;
     private ImageButton buttonAddPostToMLP;
     private String username;
-    private String[] typeOfPosts = {"Choose","Helpful","Informative","Curious","Event","Academic","Weather","Other"};
+    //The type of post - this changes which icon is used
+    private final String[] typeOfPosts = {"Choose","Helpful","Informative","Curious","Event","Academic","Weather","Other"};
     private int typeChosen;
     FirebaseFirestore fStore;
 
@@ -55,7 +58,9 @@ public class addPost extends AppCompatActivity {
         itemSelected();
         textListeners();
     }
-
+    /*
+    Spinner element listener to check which type of post the user would like to use
+     */
     private void itemSelected(){
         spinnerTypeOfPost.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -73,7 +78,9 @@ public class addPost extends AppCompatActivity {
             }
         });
     }
-
+    /*
+    Changes the visibility of elements on the page depending on if a type of post is choosen or not
+     */
     private void visiblity(int i){
         editTextPostTitle.setVisibility(i);
         textViewPostTitle.setVisibility(i);
@@ -83,7 +90,10 @@ public class addPost extends AppCompatActivity {
         textViewTextAmount.setVisibility(i);
         checkBoxExactLocation.setVisibility(i);
     }
-
+    /*
+    Text listner for the Title editText - this gives the user an idea of how many characters they can
+    enter
+     */
     private void textListeners(){
         editTextPostTitle.addTextChangedListener(new TextWatcher() {
             @Override
@@ -104,7 +114,9 @@ public class addPost extends AppCompatActivity {
 
 
 
-
+    /*
+    Create all elements when the page starts
+     */
     private void createElements(){
         editTextPostTitle = findViewById(R.id.editTextPostTitle);
         textViewPostTitle = findViewById(R.id.textViewPostTitle);
@@ -120,18 +132,27 @@ public class addPost extends AppCompatActivity {
         checkBoxExactLocation = findViewById(R.id.checkBoxExactLocation);
 
     }
-
+    /*
+    Brings the user back to the Posts screen, UserPosts bundle is set to false to indicate that
+    the Post screen should display post from all users rather than just the user logged in
+     */
     private void returnToMyLocationPost(){
         buttonAddPostToMLP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(addPost.this, MyLocationPost.class);
+                Bundle b = new Bundle();
+                b.putBoolean("UserPosts",false);
+                intent.putExtras(b);
                 startActivity(intent);
                 finish();
             }
         });
     }
-
+    /*
+    Listener to check if the Post button is clicked - also checked that the user has not set
+    any empty values
+     */
     private void addPost(){
 
         buttonPost.setOnClickListener(new View.OnClickListener() {
@@ -152,13 +173,17 @@ public class addPost extends AppCompatActivity {
             }
         });
     }
-
+    /*
+    Distort the users location
+     */
     private double distortLocation(double coord){
         double distortion = Math.random()/Settings.Distort_Factor;
         return coord + distortion;
     }
 
-
+    /*
+    Adds the new post to the firebase database
+     */
     public void addToDb(String userId,String title, String description){
         DocumentReference docRead;
         docRead = fStore.collection("users").document(userId);
@@ -174,12 +199,15 @@ public class addPost extends AppCompatActivity {
                 if(checkBoxExactLocation.isChecked()){
                     newPost = new Post(id,username,title,description,userId,Location.latitude,Location.longitude, typeChosen);
                 }else{
+                    //Distort the users location
                     newPost = new Post(id,username,title,description,userId,distortLocation(Location.latitude),distortLocation(Location.longitude), typeChosen);
                 }
-
+                //Add the new post to the posts collection on firebase
                 fStore.collection("posts").document(id).set(newPost).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
+                        editTextPostTitle.getText().clear();
+                        editTextPostDescription.getText().clear();
                         Toast.makeText(addPost.this,"Posted!", Toast.LENGTH_SHORT).show();
 
                     }

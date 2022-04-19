@@ -1,9 +1,12 @@
 package com.example.mobileapp;
-
+/*
+Comment class
+ */
 public class Comment implements Comparable<Comment> {
     private String username;
     private double timestamp;
     private String text;
+    //Each comment needs a postId to identify which post the comment was made on
     private String postId;
 
     public Comment(){}

@@ -32,7 +32,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
+/*
+When a user clicks into a post this screen is displayed, here a user can make a comment on that
+post
+ */
 public class DetailedPost extends AppCompatActivity {
     private Bundle bundle = null;
     private TextView textViewTitleDP, textViewDescriptionDP, textViewUserDataDP;
@@ -59,6 +62,7 @@ public class DetailedPost extends AppCompatActivity {
         clickLess();
         clickMore();
         clickBack();
+        //The post that has been clicked on is sent to this activity using a Bundle
         if(bundle != null){
             post = bundle.getParcelable("post");
             textViewTitleDP.setText(post.getTitle());
@@ -67,14 +71,16 @@ public class DetailedPost extends AppCompatActivity {
                 imageButtonLess.setVisibility(View.VISIBLE);
             }
             Time t = new Time();
-            textViewUserDataDP.setText(post.getUsername() + "   -   " + t.getApproxTime(post.getTimestamp()));
+            textViewUserDataDP.setText(post.getUsername() + "   -   " + t.getApproxTime((long)post.getTimestamp()));
         }
 
         comments = new ArrayList<>();
         EventChange();
     }
 
-
+/*
+Listener to see if comment button clicked
+ */
     private void addComment(){
         buttonAddComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +97,9 @@ public class DetailedPost extends AppCompatActivity {
             }
         });
     }
-
+/*
+Add the comment to the DB
+ */
     public void addToDb(String userId,String postId, String text){
         DocumentReference docRead;
         docRead = fStore.collection("users").document(userId);
@@ -114,7 +122,9 @@ public class DetailedPost extends AppCompatActivity {
         });
     }
 
-
+/*
+Gets all comments from the DB for the post that has been clicked on
+ */
     private void EventChange() {
         listenerRegistration = fStore.collection("comments").whereEqualTo("postId",post.getId())
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
